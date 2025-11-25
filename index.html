@@ -124,6 +124,8 @@ header {
 
 <!-- ===================== SCRIPTS ======================== -->
 <script>
+
+const BASE_URL = "http://localhost:4000";
 const API_URL = "https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies";
 
 /* --------- FONCTION 1 : afficher 3 films dans Trending Reviews --------- */
@@ -131,25 +133,23 @@ async function loadTrendingReviews() {
   const box = document.getElementById("reviews-container");
   box.innerHTML = '<div class="movies-loading">Chargement…</div>';
 
-  try {
-    const res = await fetch(API_URL);
+ try {
+    const res = await fetch(`${BASE_URL}/films`);
     const data = await res.json();
 
-    const trending = data.slice(0, 3); // ➜ 3 premiers
+    const trending = data.slice(0, 3);
+    container.innerHTML = '';
 
-    box.innerHTML = "";
-
-    trending.forEach(movie => {
-      const card = document.createElement("div");
-      card.className = "review-card";
-
+    trending.forEach(film => {
+      const card = document.createElement('div');
+      card.className = 'review-card';
       card.innerHTML = `
         <div class="review-content">
-          <h3>${movie.name || movie.title}</h3>
-          <p>Review: auto — ${movie.description?.substring(0, 80) || "No description"}...</p>
+          <h3>${film.name}</h3>
+          <p>Review: auto — ${film.description?.substring(0, 80) || 'Pas de description'}...</p>
         </div>
       `;
-      box.appendChild(card);
+      container.appendChild(card);
     });
   } catch (err) {
     box.innerHTML = '<div class="movies-loading">Erreur chargement reviews.</div>';
@@ -160,31 +160,28 @@ async function loadTrendingReviews() {
 async function loadUpcomingMovies() {
   const container = document.getElementById("movies-container");
   container.innerHTML = '<div class="movies-loading">Chargement…</div>';
-
+  
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(`${BASE_URL}/films/recents`);
     const data = await res.json();
 
-    // ➜ filtrer les films de 2025
-    const movies2025 = data.filter(m => String(m.year).includes("2025")).slice(0, 5);
+    const upcoming = data.slice(0, 5);
+    container.innerHTML = '';
 
-    container.innerHTML = "";
-
-    movies2025.forEach(movie => {
-      const card = document.createElement("div");
-      card.className = "movie-card";
-
+    upcoming.forEach(film => {
+      const card = document.createElement('div');
+      card.className = 'movie-card';
       card.innerHTML = `
-        <h3>${movie.name}</h3>
-        <div class="movie-meta">${movie.year} • ${movie.genre}</div>
-        <div class="movie-desc">${movie.description || ""}</div>
+        <h3>${film.name}</h3>
+        <div class="movie-meta">${film.year}</div>
+        <div class="movie-desc">${film.description || ''}</div>
         <a class="movie-btn" href="#">En savoir plus</a>
       `;
-
       container.appendChild(card);
     });
   } catch (err) {
     container.innerHTML = '<div class="movies-loading">Impossible de charger les films.</div>';
+    console.error(err);
   }
 }
 
