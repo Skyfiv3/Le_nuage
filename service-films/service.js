@@ -2,17 +2,16 @@ import express from "express";
 import fetch from "node-fetch";
 
 const app = express();
-const API_KEY = "TA_CLE_TMDB";
 
 app.get("/films", async (req, res) => {
-  const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr`);
+  const response = await fetch(`https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies`);
   const data = await response.json();
 
   const films = data.results.map(film => ({
     id: film.id,
-    titre: film.title,
-    synopsis: film.overview,
-    image: `https://image.tmdb.org/t/p/w500${film.poster_path}`,
+    name: film.name,
+    description: film.description,
+    year: film.year,
   }));
 
   res.json(films);
