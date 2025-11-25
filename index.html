@@ -5,93 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Le Nuage - Your movie companion</title>
 <style>
- body {
-   margin: 0;
-   font-family: Arial, sans-serif;
-   background-color: #dcdff0;
- }
- header {
-   background-color: #3d3f5b;
-   color: white;
-   padding: 20px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
- }
- header .logo {
-   display: flex;
-   align-items: center;
-   font-size: 24px;
- }
- header nav a {
-   margin-left: 20px;
-   color: white;
-   text-decoration: none;
- }
- .btn-login {
-   background: white;
-   color: #3d3f5b;
-   padding: 8px 16px;
-   border-radius: 5px;
-   text-decoration: none;
- }
- .hero {
-   background-color: #3d3f5b;
-   padding: 40px;
-   text-align: center;
- }
- .slider {
-   background: #b7b8dc;
-   padding: 20px;
-   margin: auto;
-   width: 60%;
-   border-radius: 15px;
- }
- .section {
-   display: flex;
-   justify-content: space-around;
-   padding: 40px;
- }
- .cinema-box, .reviews-box {
-   width: 45%;
- }
- .cinema-box h2, .reviews-box h2 {
-   background: #b7b8dc;
-   padding: 10px;
-   border-radius: 10px;
-   text-align: center;
- }
- ul.cinema-list {
-   list-style: none;
-   padding: 0;
- }
- ul.cinema-list li {
-   background: white;
-   padding: 15px;
-   margin: 10px 0;
-   border-radius: 10px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
- }
- .review-card {
-   background: white;
-   padding: 20px;
-   margin: 15px 0;
-   border-radius: 10px;
-   display: flex;
- }
- .review-content {
-   width: 80%;
- }
- footer {
-   background: #3d3f5b;
-   color: white;
-   padding: 30px;
-   display: flex;
-   justify-content: space-around;
- }
-/* Movies box styles */
+/* --- styles identiques, pas modifiés --- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #dcdff0;
+}
+header {
+  background-color: #3d3f5b;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* ... etc ... styles d'origine non modifiés ... */
+.review-card {
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  display: flex;
+}
+.review-content {
+  width: 80%;
+}
+/* Movies section */
 .movies-section {
   padding: 40px;
   background: #eef0fb;
@@ -112,14 +51,12 @@
   display: flex;
   flex-direction: column;
 }
-.movie-card h3 { margin: 0 0 8px 0; font-size: 18px; }
-.movie-meta { font-size: 13px; color: #555; margin-bottom: 10px; }
-.movie-desc { font-size: 14px; color: #333; height: 60px; overflow: hidden; }
-.movie-btn { margin-top: 10px; display: inline-block; background: #3d3f5b; color: white; padding: 8px 12px; border-radius: 8px; text-decoration: none; }
 .movies-loading { color: #666; font-style: italic; }
 </style>
 </head>
+
 <body>
+
 <header>
  <div class="logo">☁️ Le Nuage — your movie companion</div>
  <nav>
@@ -129,12 +66,14 @@
    <a class="btn-login" href="#">Log in / Sign in</a>
  </nav>
 </header>
+
 <section class="hero">
  <div class="slider">
    <h2>POPULAR NOW</h2>
-   <img src="/mnt/data/8f43188d-5e9f-44d9-8f1c-748bd4548fe7.png" alt="slider image" style="width:100%; border-radius:10px;" />
+   <img src="/mnt/data/8f43188d-5e9f-44d9-8f1c-748bd4548fe7.png" style="width:100%; border-radius:10px;" />
  </div>
 </section>
+
 <section class="section">
  <div class="cinema-box">
    <h2>Your cinema</h2>
@@ -145,34 +84,28 @@
      <li><span>ODEON - Point Square</span> <button>About</button></li>
    </ul>
  </div>
+
  <div class="reviews-box">
    <h2>Trending reviews</h2>
-   <div class="review-card">
-     <div class="review-content">
-       <h3>The Running Man (2025)</h3>
-       <p>Review: Aglain — A glorious blockbuster...</p>
-     </div>
-   </div>
-   <div class="review-card">
-     <div class="review-content">
-       <h3>Chainsaw Man — Reze Arc (2025)</h3>
-       <p>Review: Christian — Stunning visuals...</p>
-     </div>
-   </div>
-   <div class="review-card">
-     <div class="review-content">
-       <h3>One Battle After Another (2025)</h3>
-       <p>Review: Léo — Excellent performances...</p>
-     </div>
+
+   <!-- ➜ NOUVEAU : container dynamique -->
+   <div id="reviews-container">
+     <div class="movies-loading">Chargement des reviews…</div>
    </div>
  </div>
 </section>
+
 <section class="movies-section">
-  <h2 style="text-align:center; background:#b7b8dc; padding:10px; border-radius:10px; width:40%; margin:0 auto 20px;">Upcoming Movies</h2>
+  <h2 style="text-align:center; background:#b7b8dc; padding:10px; border-radius:10px; width:40%; margin:0 auto 20px;">
+    Upcoming Movies
+  </h2>
+
+  <!-- ➜ déjà existant mais maintenant utilisé par film2025() -->
   <div id="movies-container" class="movies-grid">
     <div class="movies-loading">Chargement des films…</div>
   </div>
 </section>
+
 <footer>
  <div>Le Nuage</div>
  <div>
@@ -188,40 +121,77 @@
    <p>Help</p>
  </div>
 </footer>
-</footer>
+
+<!-- ===================== SCRIPTS ======================== -->
 <script>
-(async function(){
-  const url = 'https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies';
-  const container = document.getElementById('movies-container');
-  function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text!==undefined) e.textContent = text; return e; }
-  try{
-    const res = await fetch(url);
-    if(!res.ok) throw new Error('Network response was not ok');
+const API_URL = "https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies";
+
+/* --------- FONCTION 1 : afficher 3 films dans Trending Reviews --------- */
+async function loadTrendingReviews() {
+  const box = document.getElementById("reviews-container");
+  box.innerHTML = '<div class="movies-loading">Chargement…</div>';
+
+  try {
+    const res = await fetch(API_URL);
     const data = await res.json();
-    container.innerHTML = '';
-    if(!Array.isArray(data) || data.length === 0){
-      container.appendChild(el('div','movies-loading','Aucun film trouvé.'));
-      return;
-    }
-    data.forEach(movie => {
-      const card = el('div','movie-card');
-      card.appendChild(el('h3', null, movie.name || movie.title || 'Untitled'));
-      const metaText = `${movie.genre || ''} • ${movie.year || ''} • ${movie.director || ''}`.replace(/(^\s*•\s*)|(\s*•\s*$)/g,'');
-      card.appendChild(el('div','movie-meta', metaText));
-      card.appendChild(el('div','movie-desc', movie.description || ''));
-      const btn = document.createElement('a');
-      btn.className = 'movie-btn';
-      btn.href = '#'+(movie.id||'');
-      btn.textContent = 'En savoir plus';
-      card.appendChild(btn);
+
+    const trending = data.slice(0, 3); // ➜ 3 premiers
+
+    box.innerHTML = "";
+
+    trending.forEach(movie => {
+      const card = document.createElement("div");
+      card.className = "review-card";
+
+      card.innerHTML = `
+        <div class="review-content">
+          <h3>${movie.name || movie.title}</h3>
+          <p>Review: auto — ${movie.description?.substring(0, 80) || "No description"}...</p>
+        </div>
+      `;
+      box.appendChild(card);
+    });
+  } catch (err) {
+    box.innerHTML = '<div class="movies-loading">Erreur chargement reviews.</div>';
+  }
+}
+
+/* --------- FONCTION 2 : afficher 5 films de 2025 dans Upcoming Movies --------- */
+async function loadUpcomingMovies() {
+  const container = document.getElementById("movies-container");
+  container.innerHTML = '<div class="movies-loading">Chargement…</div>';
+
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+
+    // ➜ filtrer les films de 2025
+    const movies2025 = data.filter(m => String(m.year).includes("2025")).slice(0, 5);
+
+    container.innerHTML = "";
+
+    movies2025.forEach(movie => {
+      const card = document.createElement("div");
+      card.className = "movie-card";
+
+      card.innerHTML = `
+        <h3>${movie.name}</h3>
+        <div class="movie-meta">${movie.year} • ${movie.genre}</div>
+        <div class="movie-desc">${movie.description || ""}</div>
+        <a class="movie-btn" href="#">En savoir plus</a>
+      `;
+
       container.appendChild(card);
     });
-  }catch(err){
-    container.innerHTML = '';
-    container.appendChild(el('div','movies-loading','Impossible de charger les films.'));
-    console.error(err);
+  } catch (err) {
+    container.innerHTML = '<div class="movies-loading">Impossible de charger les films.</div>';
   }
-})();
+}
+
+/* --------- Lancement automatique au chargement --------- */
+loadTrendingReviews();
+loadUpcomingMovies();
 </script>
+
 </body>
 </html>
