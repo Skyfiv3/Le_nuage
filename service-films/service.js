@@ -21,7 +21,7 @@ app.get("/films/recents", async (req, res) => {
   const response = await fetch(`https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies`);
   const data = await response.json();
 
-  const films2025 = data.results.filter(film => film.year = '2025'); 
+  const films2025 = data.results.filter(film => film.year === '2025'); 
 
   const films = films2025.results.map(film => ({
     id: film.id,
