@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Film — Le Nuage</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">☁️ Le Nuage — your movie companion</div>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="feed.html">Feed</a>
+        <a href="profil.html">Profile</a>
+        <a class="btn-login" href="#">Log in / Sign in</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h1 id="movie-title">Chargement...</h1>
+    <p id="movie-director"></p>
+
+    <img id="movie-poster" class="movie-poster" />
+
+    <h3>Premise</h3>
+    <div class="premise-box">
+        <p id="movie-premise"></p>
+    </div>
+</div>
+
+<footer>
+    <div>Le Nuage</div>
+    <div>
+        <p>About</p>
+        <p>Our goals</p>
+    </div>
+    <div>
+        <p>Terms</p>
+        <p>GDPR</p>
+    </div>
+    <div>
+        <a href="contact.html" style="color:white;text-decoration: none;">Contact</a>
+        <p>Help</p>
+    </div>
+</footer>
+
+
+<script>
+    (async function () {
+        const url = 'https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies';
+
+        const titleEl = document.getElementById('movie-title');
+        const directorEl = document.getElementById('movie-director');
+        const posterEl = document.getElementById('movie-poster');
+        const premiseEl = document.getElementById('movie-premise');
+
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('Erreur réseau');
+
+            const data = await res.json();
+            if (!Array.isArray(data) || data.length === 0) {
+                titleEl.textContent = "Aucun film trouvé.";
+                return;
+            }
+
+            const movie = data[0];
+
+            titleEl.textContent = movie.name || movie.title || "Sans titre";
+            directorEl.textContent = movie.director ? `Directed by ${movie.director}` : "";
+            posterEl.src = movie.image || "";
+            posterEl.alt = movie.name || "Movie poster";
+            premiseEl.textContent = movie.description || "Aucune description disponible.";
+
+        } catch (err) {
+            console.error(err);
+            titleEl.textContent = "Impossible de charger les données du film.";
+        }
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Nuage — Feed</title>
+
+    <!-- Style général du site -->
+    <link rel="stylesheet" href="style/style.css">
+
+    <style>
+        /* Quelques styles propres au feed (optionnels, peuvent aller dans style.css) */
+        .feed-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .user-card, .review-card-full, .movie-suggestion-box, .cinema-highlight {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin-bottom: 30px;
+        }
+
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .big-movie-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .suggestion-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-item {
+            width: 30%;
+            min-width: 250px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+            padding: 12px;
+        }
+
+        .suggestion-item img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-watchlist {
+            background: #3d3f5b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .cinema-banner {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 12px;
+        }
+
+        .btn-ticket {
+            background: #3d3f5b;
+            padding: 10px 18px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">☁️ Le Nuage — your movie companion</div>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="feed.html">Feed</a>
+        <a href="profil.html">Profile</a>
+        <a class="btn-login" href="#">Log in / Sign in</a>
+    </nav>
+</header>
+
+
+<!-- FEED CONTENT -->
+<div class="feed-container">
+
+    <!-- USER MINI PROFILE -->
+    <div class="user-card">
+        <div style="display:flex; align-items:center;">
+            <img src="https://i.imgur.com/5ZQ1zJq.png" class="profile-pic">
+            <div>
+                <h3 style="margin:0;">NezukoLover_6</h3>
+                <p style="margin:3px 0; color:#555;">Membre actif — A survécu à l’hiver</p>
+                <p style="margin:0; color:#777;">54 ❤️ · 6 commentaires</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- REVIEW SECTION -->
+    <div class="review-card-full">
+        <div style="display:flex; align-items:center;">
+            <img src="https://i.imgur.com/fdOaK8C.png" class="profile-pic">
+            <div>
+                <h3 style="margin:0;">Chris24</h3>
+                <p style="margin:3px 0; color:#555;">Has written a review of The Running Man</p>
+                <p style="color:#ffd700; margin:0;">★★★★★</p>
+            </div>
+        </div>
+
+        <img src="https://i.imgur.com/7gkz3Qe.jpeg" class="big-movie-img">
+
+        <p>
+            THE RUNNING MAN delivers a brilliant mix of bold characters and fast-paced action.
+            The soundtrack is crazy, the tension never stops growing, and each scene is more
+            intense than the previous one. Honestly, a must-watch this year.
+        </p>
+        <p style="color:#777;">12 ❤️</p>
+    </div>
+
+    <!-- MOVIE SUGGESTIONS -->
+    <div class="movie-suggestion-box">
+        <h2 style="margin-bottom: 20px;">You might like these new movies</h2>
+
+        <div class="suggestion-grid">
+
+            <!-- Movie 1 -->
+            <div class="suggestion-item">
+                <img src="https://i.imgur.com/3hPypVI.jpeg">
+                <h3>Wicked: For Good</h3>
+                <p style="color:#555;">Directed by R. Smith</p>
+                <a class="btn-watchlist" href="#">Add to watchlist</a>
+            </div>
+
+            <!-- Movie 2 -->
+            <div class="suggestion-item">
+                <img src="https://i.imgur.com/qbBf6Tj.jpeg">
+                <h3>Predator: Badlands</h3>
+                <p style="color:#555;">Directed by J. Brown</p>
+                <a class="btn-watchlist" href="#">Add to watchlist</a>
+            </div>
+
+            <!-- Movie 3 -->
+            <div class="suggestion-item">
+                <img src="https://i.imgur.com/iWn9QqO.jpeg">
+                <h3>The Roses</h3>
+                <p style="color:#555;">Directed by M. Nash</p>
+                <a class="btn-watchlist" href="#">Add to watchlist</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CINEMA HIGHLIGHT -->
+    <div class="cinema-highlight">
+        <img src="https://i.imgur.com/tt3c4fx.jpeg" class="cinema-banner">
+        <h3>One of your favorite theaters added a new screening!</h3>
+        <p style="color:#666;">Crowford Dublin</p>
+        <p style="font-weight:bold;">From €8</p>
+        <a href="#" class="btn-ticket">Buy a ticket</a>
+    </div>
+
+</div>
+
+<footer>
+    <div>Le Nuage</div>
+    <div>
+        <p>About</p><p>Our goals</p>
+    </div>
+    <div>
+        <p>Terms</p><p>GDPR</p>
+    </div>
+    <div>
+        <p>Contact</p><p>Help</p>
+    </div>
+</footer>
+
+</body>
+</html>

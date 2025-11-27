@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Le Nuage - Your movie companion</title>
+    <link rel="stylesheet" href="style/style.css">
+
+</head>
+<body>
+<header>
+    <div class="logo">☁️ Le Nuage — your movie companion</div>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="feed.html">Feed</a>
+        <a href="profil.html">Profile</a>
+        <a class="btn-login" href="#">Log in / Sign in</a>
+    </nav>
+</header>
+<section class="hero">
+    <div class="slider">
+        <h2>POPULAR NOW</h2>
+        <img src="/mnt/data/8f43188d-5e9f-44d9-8f1c-748bd4548fe7.png" alt="slider image" style="width:100%; border-radius:10px;" />
+    </div>
+</section>
+<section class="section">
+    <div class="cinema-box">
+        <h2>Your cinema</h2>
+        <ul class="cinema-list">
+            <li><span>Cineworld - Dublin</span> <button>About</button></li>
+            <li><span>Savoy Cinema</span> <button>About</button></li>
+            <li><span>Light House Cinema</span> <button>About</button></li>
+            <li><span>ODEON - Point Square</span> <button>About</button></li>
+        </ul>
+    </div>
+    <div class="reviews-box">
+        <h2>Trending reviews</h2>
+        <div class="review-card">
+            <div class="review-content">
+                <h3>The Running Man (2025)</h3>
+                <p>Review: Aglain — A glorious blockbuster...</p>
+            </div>
+        </div>
+        <div class="review-card">
+            <div class="review-content">
+                <h3>Chainsaw Man — Reze Arc (2025)</h3>
+                <p>Review: Christian — Stunning visuals...</p>
+            </div>
+        </div>
+        <div class="review-card">
+            <div class="review-content">
+                <h3>One Battle After Another (2025)</h3>
+                <p>Review: Léo — Excellent performances...</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="movies-section">
+    <h2 style="text-align:center; background:#b7b8dc; padding:10px; border-radius:10px; width:40%; margin:0 auto 20px;">Upcoming Movies</h2>
+    <div id="movies-container" class="movies-grid">
+        <div class="movies-loading">Chargement des films…</div>
+    </div>
+</section>
+<footer>
+    <div>Le Nuage</div>
+    <div>
+        <p>About</p>
+        <p>Our goals</p>
+    </div>
+    <div>
+    <div>
+        <p>Terms</p>
+        <p>GDPR</p>
+    </div>
+    <div>
+        <a href="contact.html" style="color:white;text-decoration: none;">Contact</a>
+        <p>Help</p>
+    </div>
+</footer>
+</footer>
+<script>
+    (async function(){
+    .//const BASE_URL = "http://localhost:4000";
+        const url = 'https://j55wpg0mc7.execute-api.eu-west-2.amazonaws.com/default/Get_Movies';
+        const container = document.getElementById('movies-container');
+        function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text!==undefined) e.textContent = text; return e; }
+        try{
+            //const res = await fetch('${BASE_URL}/films');
+            const res = await fetch(url);
+            if(!res.ok) throw new Error('Network response was not ok');
+            const data = await res.json();
+            container.innerHTML = '';
+            if(!Array.isArray(data) || data.length === 0){
+                container.appendChild(el('div','movies-loading','Aucun film trouvé.'));
+                return;
+            }
+            data.forEach(movie => {
+                const card = el('div','movie-card');
+                card.appendChild(el('h3', null, movie.name || movie.title || 'Untitled'));
+                const metaText = `${movie.genre || ''} • ${movie.year || ''} • ${movie.director || ''}`.replace(/(^\s*•\s*)|(\s*•\s*$)/g,'');
+                card.appendChild(el('div','movie-meta', metaText));
+                card.appendChild(el('div','movie-desc', movie.description || ''));
+                const btn = document.createElement('a');
+                btn.className = 'movie-btn';
+                btn.href = '#'+(movie.id||'');
+                btn.textContent = 'En savoir plus';
+                card.appendChild(btn);
+                container.appendChild(card);
+            });
+        }catch(err){
+            container.innerHTML = '';
+            container.appendChild(el('div','movies-loading','Impossible de charger les films.'));
+            console.error(err);
+        }
+    })();
+</script>
+</body>
+</html>
